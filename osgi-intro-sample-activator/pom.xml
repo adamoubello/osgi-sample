@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>osgi-intro-sample-activator</artifactId>
+    <packaging>bundle</packaging>
+    <name>osgi-intro-sample-activator</name>
+    <url>http://maven.apache.org</url>
+
+    <parent>
+        <groupId>com.adamoubello</groupId>
+        <artifactId>osgi-sample</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Name>${project.artifactId}</Bundle-Name>
+                        <Bundle-Version>${project.version}</Bundle-Version>
+                        <!-- Qualified name of the class that exposes the activator iface. -->
+                        <Bundle-Activator>com.adamoubello.HelloWorld</Bundle-Activator>
+                        <!-- One important thing to note: since you are not exporting
+                        the package "com.adamoubello.osgi.sample.activator", -->
+                        <!-- you should at least add it to the Private-Package instruction. Otherwise, -->
+                        <!-- the classes inside the package will not be copied to your bundle, -->
+                        <!-- as the default value of this instruction is empty. -->
+                        <Private-Package>com.adamoubello.osgi.sample.activator</Private-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
+
